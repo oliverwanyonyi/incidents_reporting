@@ -1,0 +1,162 @@
+.main-content {
+  position: relative;
+  left: 260px;
+  width: calc(100% - 260px);
+  background: #f7f7f7;
+  height: 100vh;
+}
+
+ul {
+  list-style: none;
+}
+a{
+    text-decoration: none;
+}
+
+.main-list {
+    padding:20px 8px;
+}
+.main-list-container {
+  padding: 20px 8px;
+  padding: 12px 8px;
+  border-radius: 6px;
+  background: #ffffff;
+}
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.admin-nav-link {
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  background: #14b0d2;
+  transition: 500ms;
+  border: 2px solid #11677b;
+  border-radius: 8px;
+}
+.admin-nav-link .icon{
+    margin-left: 4px;
+    font-size: 15px;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link:focus {
+    background: #11677b;;
+}
+.table-container{
+    position: relative;
+    overflow-x: auto;
+    box-shadow: 0 8px 14px rgba(0,0,0,.15);
+    width: 100%;
+}
+
+.a-list-table{
+    width: 100%;
+    font-size: 14px;
+    color: rgb(107 114 128/1);
+    width: 100%;
+  border-collapse: collapse;
+}
+
+.a-list-table thead{
+color: rgb(55 65 81/1);
+text-transform: uppercase;
+background: rgb(229 231 235/1);
+font-size: 12px;
+}
+
+.a-list-table th , .a-list-table td{
+    padding: 24px 12px;
+    white-space: nowrap;
+    text-align:justify;
+
+}
+
+.a-list-table tbody tr{
+    padding:  8px 0;
+}
+
+.a-list-table tbody tr.even{
+  background-color: rgb(241 245 249 /1);
+}
+
+.breadcrump{
+    padding:0 24px;
+    padding-top: 16px;
+}
+
+.breadcrump-title{
+    /* font-semibold text-[15px] text-black capitalize */
+    font-weight: 500;
+    font-size: 15px;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+
+/* form styles */
+.form{
+  padding: 20px;
+}
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.form-grid{
+  border-bottom: 1px solid #ececec;
+  
+}
+.form-header{
+  color: #14b0d2;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.form button{
+  width: unset;
+  padding: 14px 36px;
+  transition: 300ms ease-in-out;
+}
+.form-label{
+display: block;
+font-size: 14px!important;
+
+}
+.button-group{
+  display: flex;
+  gap: 14px;
+}
+.form button:hover{
+  background: #11677b;
+}
+
+td.overflow{
+  white-space: normal;
+}
+
+td div.description{
+  max-width:300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+  line-height: 1.4rem;
+  /* max-height: 80px; */
+}
+
+
+@media(max-width:768px){
+  .grid{
+    grid-template-columns: 1fr;
+  }
+}

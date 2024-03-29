@@ -1,0 +1,151 @@
+.user-nav {
+  background: #ffffff;
+  padding: 20px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+.nav-brand {
+  visibility: hidden;
+}
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.bell {
+  font-size: 17px;
+
+  cursor: pointer;
+  color: #101010;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #0bb4da;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+}
+.icon {
+  font-size: 14px;
+}
+.icon.ch {
+  margin-left: 8px;
+}
+.nav-link-item {
+  position: relative;
+}
+.nav-link-item.active button {
+  border-color: #0bb4da;
+}
+.nav-link-item.active .bell {
+  color: #0bb4da;
+}
+.nav-link-item button {
+  display: flex;
+  align-items: center;
+  background: #ececec;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid #d3d3d3;
+  color: #303030;
+  cursor: pointer;
+}
+
+.subnav-items-container {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 20px);
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+  width: 300px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: 500ms;
+  transform: translateY(10%);
+  pointer-events: none;
+}
+
+.nav-link-item.active .subnav-items-container {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.notif-item {
+  padding: 8px 10px;
+  color: #303030;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.notif-header {
+  padding: 10px 10px;
+  color: #101010;
+  font-weight: 700;
+  background: #e0f9ff;
+  text-align: center;
+}
+
+.notif-item.unread .notif-text {
+  color: #101010 !important;
+  font-weight: 600;
+}
+.notif-item:hover  .notif-text{
+  opacity: 0.5;
+}
+
+.notifs_body {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notifs_body .empty{
+    text-align: center;
+    display: block;
+    font-size: 13px;
+    color: #303030;
+}
+
+
+.remove-btn {
+  color: #f42d2d;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: none;
+  text-transform: capitalize;
+  margin-left: 6px;
+  font-weight: 700;
+}
+
+.sub-nav-items li {
+  padding: 10px 14px;
+  list-style: none;
+}
+.sub-nav-items li:hover {
+  background: #ececec;
+  cursor: pointer;
+  color: #0bb4da;
+}
+
+.user-sub .subnav-items-container {
+  padding: 8px 0;
+}
+
+@media (max-width: 768px) {
+  .nav-brand {
+    visibility: visible;
+  }
+}

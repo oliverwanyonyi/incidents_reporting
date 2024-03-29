@@ -1,0 +1,135 @@
+.chat-header {
+  padding: 10px;
+  background: #e1ecf1;
+}
+.message-area {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.chat-area {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+.messages-wrapper {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.messages-wrapper::-webkit-scrollbar {
+  width: 8px; /* Set width for scrollbar */
+}
+
+.messages-wrapper::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Border radius for the scrollbar thumb */
+}
+
+.messages-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
+.message-area form {
+  /* height: 150px; */
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+}
+.message-area form input {
+  background: #ebebeb;
+ height: 55px;
+  width: 100%;
+  border: 0;
+  outline: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  resize: vertical;
+  display: block;
+  margin-bottom: 10px;
+  outline: 2px solid transparent;
+}
+
+.message-area form input:focus {
+  outline-color: #14b0d2;
+}
+.message-area form button {
+  /* position: absolute;
+    right: 10px; */
+  width: max-content;
+  padding: 10px 20px;
+  bottom: 10px;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.messages-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Enable vertical scrollbar if needed */
+  padding: 10px; /* Add padding to the container */
+}
+
+.messages-wrapper {
+  display: flex;
+  flex-direction: column; /* Stack messages vertically */
+}
+
+.message {
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 10px; /* Add padding to each message */
+  margin-bottom: 5px; /* Add spacing between messages */
+  border-radius: 8px; /* Rounded corners */
+  color: #292929;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.message:last-child {
+  margin-bottom: 0; /* Remove margin-bottom for the last message */
+}
+
+.timestamp {
+  font-size: 12px; /* Adjust font size as needed */
+  color: #666; /* Gray color */
+  margin-top: 5px; /* Add spacing above the timestamp */
+}
+.message-author {
+  color: #202020;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.message-text {
+  font-weight: 400;
+}
+.message-box{
+  padding: 20px;
+}
+.message-box .info{
+  background: #f0f0f0;
+  padding: 30px ;
+  text-align: center;
+  color: #304037;
+}
+.chat-user{
+cursor: pointer;
+}
+
+.close-chat-btn{
+  cursor: pointer;
+  background: #f0f0f0;
+  outline: 0;
+  border: none;
+  padding: 5px 13px;
+  font-weight: 600;
+  border-radius: 8px;
+
+}

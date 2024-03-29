@@ -1,0 +1,38 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+  width: 260px;
+  background: #0b0c1c;
+  height: 100vh;
+  padding: 20px 0;
+}
+.sidebar a{
+  text-decoration: none;
+}
+
+.sidebar-brand {
+  text-decoration: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 18px;
+  display: block;
+  font-weight: 800;
+ color: #14b0d2;
+}
+
+.sidebar-center{
+  padding-top: 20px;
+}
+
+.submenu-link{
+  color: rgb(156 163 175/1);
+  display: block;
+  padding: 12px 0;
+  white-space: nowrap;
+  transition: 300ms;
+}
+
+.submenu-link:hover{
+  color: #ffffff;
+}

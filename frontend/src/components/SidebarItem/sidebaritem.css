@@ -1,0 +1,33 @@
+.sidebar-link-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px;
+}
+
+.sidebar-link{
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+    color: #d5d5d5;
+    transition: 300ms;
+}
+
+.sidebar-link:hover{
+    color: #ffffff;
+}
+.sidebar-link.active{
+    color: #ffffff;
+}
+.link-title{
+    white-space: nowrap;
+}
+.sidebar-icon{
+    color: rgb(156 163 175/1);
+    font-size: 12px;
+}
+
+.sub-menu{
+background: #1d1b31;
+padding: 0 40px;
+}

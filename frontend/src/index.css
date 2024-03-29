@@ -1,0 +1,13 @@
+.incident-desc{
+    font-weight: 500;
+    color: #202020;
+    max-width:300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    line-height: 1.4rem;
+  }
