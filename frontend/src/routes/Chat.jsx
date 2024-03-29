@@ -16,17 +16,14 @@ const Chat = () => {
     socket,
     chatActive,
     agent,
-    user,
     chats,
-    messages,
     reporter,
     setMessages,
     setChat,
     setChatActive,
     chat,
-    position,
-    estimatedWaitingTime,
-    waiting
+    authoritiesOnline,
+    setAgent
   } = useContext(SocketContext);
 
   function handleJoin() {
@@ -41,6 +38,15 @@ const Chat = () => {
     setChat(chat);
     setChatActive(true);
     setMessages(chat.messages);
+  }
+
+  function handleAuthorityClick(authority){
+      setAgent(authority);
+      setChatActive(true);
+      setMessages([]);
+      const chat = chats.find(ch=>ch.chat_users[0].user === authority?.id || ch.chat_users[1].user == authority.id)
+      setChat(chat);
+      setMessages(chat.messages||[])
   }
 
   function handleEndChat(){
@@ -72,14 +78,7 @@ const Chat = () => {
         <label class="info-label">Name:</label>
         <span class="info-value">{chat && getChatDetails(authUser, chat?.chat_users)?.chatUser.full_name}</span>
       </div>
-      <div class="info-row">
-        <label class="info-label">Email:</label>
-        <span class="info-value">{chat && getChatDetails(authUser, chat?.chat_users)?.chatUser.email}</span>
-      </div>
-      <div class="info-row">
-        <label class="info-label">Phone:</label>
-        <span class="info-value">{chat && getChatDetails(authUser, chat?.chat_users)?.chatUser.phone}</span>
-      </div>
+    
      
      
 </div>
@@ -88,13 +87,9 @@ const Chat = () => {
       </Modal>
       <div className="call-container">
         <div className="call-sidebar">
-          {/* <div className="users-online">
-                    <h3 className='s-title'>Authorities Online</h3>
 
-                    <ul className="call-history-list">
-                    <li className="call-history-item"><div className="icon"><FaUserCircle/></div> <div className="caller">Oliver Wanyonyi</div></li>
-                </ul>
-                </div> */}
+    
+        
           <div className="calls-log">
             <h3 className="s-title" style={{ textAlign: "center" }}>
               Chats
@@ -130,6 +125,39 @@ const Chat = () => {
             </div>
 
           </div>
+
+      {authUser?.roles.map(role=>role.name).includes('user') &&    <div className="calls-log">
+            <h3 className="s-title" style={{ textAlign: "center" }}>
+          Authorities Online
+            </h3>
+
+            <div className="chats-scrollable">
+
+            <ul className="call-history-list">
+              {authoritiesOnline.map((authority) => (
+                <li
+                  className={`
+                  call-history-item`}
+                  key={authority?.id}
+                  onClick={() => handleAuthorityClick(authority)}
+                >
+                  <div className="avatar-icon">
+                    <img src={chatuser} alt="avatar" />
+                  </div>
+                  <div className="caller">
+                    {/* {chatItem?.messages[0]?.senderInfo?.id !== authUser?.id
+                      ? authUser.full_name
+                      : chatItem?.messages[0]?.receiverInfo?.full_name} */}
+                      {authority.full_name}
+                    <div className="timestamp">
+                     Department ({authority?.ward_authority.designation})
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            </div>
+            </div>}
         </div>
         <div className="main-call">
              {chatActive ? (

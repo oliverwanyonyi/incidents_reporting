@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   req.agents_online = agents_online;
   req.ward_authorities = ward_authorities
 
-  function updateUsersOnline() {}
+  
 
   next();
 });
@@ -82,12 +82,13 @@ io.on("connection", (socket) => {
     if (userExists === -1) {
       let user = { ...data, socket_id: socket.id };
       users_online.push(user);
+      io.emit('users_online',users_online)
+  io.emit("agents_online", Array.from(agents_online.values()));
+
     }
   });
 
-  socket.on("user_join_chat", (data) => {
-    assignUserToAgent();
-  });
+
 
   socket.on("agent_join", (data) => {
     let user = { ...data, socket_id: socket.id, busy: false };
@@ -95,14 +96,19 @@ io.on("connection", (socket) => {
     if (!agents_online.has(data.id)) {
 
       agents_online.set(data.id, user);
-      io.emit("agents_online", Object.values(agents_online));
 
     }
+    
+  io.emit("agents_online", Array.from(agents_online.values()));
+  io.emit('users_online',users_online)
+
+
   });
 
   socket.on('subadmin_join', (data)=>{
     let user = { ...data, socket_id: socket.id, busy: false };
-    console.log('subadmin init');
+   
+    
     if(!ward_authorities.has(data.id)){
       ward_authorities.set(data.id, user)
     }
@@ -149,16 +155,18 @@ io.on("connection", (socket) => {
   });
 
   socket.on("message", async (data) => {
+  
     let receiver, sender_socket, receiver_socket;
     if (data.isAgent) {
       receiver = users_online.find((user) => user.id === data.receiver_id);
-      sender_socket = data.sender_socket;
-      receiver_socket = receiver.socket_id;
+
+      sender_socket = data?.sender_socket;
+      receiver_socket = receiver?.socket_id;
       console.log(receiver, receiver_socket);
     } else {
       receiver = agents_online.get(data.receiver_id);
       sender_socket = data.sender_socket;
-      receiver_socket = receiver.socket_id;
+      receiver_socket = receiver?.socket_id;
     }
     let chat;
 
@@ -266,6 +274,8 @@ io.on("connection", (socket) => {
       agents_online.delete(agentId);
 
       console.log(`Agent disconnected: ${socketId}`);
+
+      io.emit("agents_online", Array.from(agents_online.values()));
     }
   }
 
@@ -276,6 +286,7 @@ io.on("connection", (socket) => {
      ward_authorities.delete(adminId);
 
       console.log(`Admin disconnected: ${socketId}`);
+
     }
   }
 
@@ -286,6 +297,9 @@ io.on("connection", (socket) => {
       const removedUser = users_online.splice(index, 1)[0];
       console.log(`User disconnected: ${removedUser.id}`);
     }
+
+    io.emit('users_online',users_online)
+
   }
 
   function getAgentIdBySocketId(socketId) {
