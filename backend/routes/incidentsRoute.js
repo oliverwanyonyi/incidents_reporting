@@ -143,19 +143,19 @@ router.put("/:id/assign", protect, async (req, res, next) => {
     }
 
     if (incident.assignedTo) {
-      return res
-        .status(400)
-        .json({
-          message: "This incident is already assigned to another authority",
-        });
+      return res.status(400).json({
+        message: "This incident is already assigned to another authority",
+      });
     }
 
     incident.assignedTo = req.body.user_id;
 
+    incident.approved = true;
+
     incident.status = "investigation_in_progress";
 
     await incident.save();
-    console.log(req.body.user_id);
+    
 
     await Notification.create({
       initiator_id: req.user.id,

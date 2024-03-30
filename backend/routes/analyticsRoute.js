@@ -1,56 +1,83 @@
-const sequelize  = require('sequelize');
-const { Incident } = require('../models');
-const db = require('../models');
+const sequelize = require("sequelize");
+const { Incident } = require("../models");
+const db = require("../models");
+const { protect } = require("../middlewares/auth");
 
-const router = require('express').Router()
+const router = require("express").Router();
 
-
-router.get('/admin', async (req,res,next)=>{
-    try {
-        const totalIncidents = await Incident.count();
+router.get("/admin", protect, async (req, res, next) => {
+  try {
+    const totalIncidents = await Incident.count({
+      where: {
+        ward: req.user.ward,
+      },
+    });
 
     // Number of incidents per incident type
     const incidentTypes = await Incident.findAll({
-      attributes: ['incident_type', [sequelize.fn('COUNT', sequelize.col('incident_type')), 'count']],
-      group: ['incident_type'],
+      where: {
+        ward: req.user.ward,
+      },
+      attributes: [
+        "incident_type",
+        [sequelize.fn("COUNT", sequelize.col("incident_type")), "count"],
+      ],
+      group: ["incident_type"],
       raw: true,
     });
 
     // Count of incidents for each unique status
     const incidentStatuses = await Incident.findAll({
-      attributes: ['status', [sequelize.fn('COUNT', sequelize.col('status')), 'count']],
-      group: ['status'],
+      where: {
+        ward: req.user.ward,
+      },
+      attributes: [
+        "status",
+        [sequelize.fn("COUNT", sequelize.col("status")), "count"],
+      ],
+      group: ["status"],
       raw: true,
     });
 
     const totalUsers = await db.User.count({
-      include: [{
-        model: db.Role,
-        where: {
-          name: { [db.Sequelize.Op.ne]: 'system-admin' } // Exclude users with 'system-admin' role
-        }
-      }]
+      include: [
+        {
+          model: db.Role,
+          where: {
+            name: { [db.Sequelize.Op.ne]: "system-admin" }, // Exclude users with 'system-admin' role
+          },
+        },
+      ],
     });
 
     const totalActiveUsers = await db.User.count({
       where: { active: true }, // Count only active users
-      include: [{
-        model: db.Role,
-        where: {
-          name: { [db.Sequelize.Op.ne]: 'system-admin' } // Exclude users with 'system-admin' role
-        }
-      }]
+      include: [
+        {
+          model: db.Role,
+          where: {
+            name: { [db.Sequelize.Op.ne]: "system-admin" }, // Exclude users with 'system-admin' role
+          },
+        },
+      ],
     });
 
     const totalWardOfficers = await db.User.count({
-      include: [{
-        model: db.Role,
-        where: { name: 'ward-officer' } // Count only users with 'ward-officer' role
-      }]
+      where: {
+        ward: req.user.ward,
+      },
+      include: [
+        {
+          model: db.Role,
+          where: { name: "ward-officer" }, // Count only users with 'ward-officer' role
+        },
+      ],
     });
 
     const anonymous = await db.Incident.count({
-      where: { reporter_id: null } // Count incidents where reporter_id is null
+     
+      where: { reporter_id: null,
+        ward:req.user.ward }, // Count incidents where reporter_id is null
     });
 
     // Prepare response
@@ -61,17 +88,14 @@ router.get('/admin', async (req,res,next)=>{
       totalUsers,
       totalActiveUsers,
       totalWardOfficers,
-      anonymous
+      anonymous,
     };
     console.log(analyticsData);
 
-    res.json(analyticsData);  
-
-    } catch (error) {
-        next(error)
-    }
+    res.json(analyticsData);
+  } catch (error) {
+    next(error);
+  }
 });
 
-
-
-module.exports= router
+module.exports = router;

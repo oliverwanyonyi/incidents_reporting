@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa6";
 import { GoAlertFill } from "react-icons/go";
 import { FiAlertTriangle } from "react-icons/fi";
 import { useAuth } from "../../store/AuthProvider/AuthProvider";
+import { FaUsers } from "react-icons/fa";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -84,7 +85,7 @@ authUser?.roles?.some(role => ['system-admin'].includes(role.name)) ?
   <p>{data?.totalWardOfficers || 0}</p>
 </div>
 <div className="analytics-icon">
-<FiAlertTriangle /> 
+<FaUsers /> 
 </div>
 </div>
 </>:

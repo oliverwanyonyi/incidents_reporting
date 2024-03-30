@@ -65,6 +65,11 @@ module.exports = (sequelize,Sequelize) =>{
         },
         onDelete: "CASCADE",
       },
+    approved: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
 
       assignedTo:{
         type: DataTypes.INTEGER,

@@ -122,7 +122,9 @@ const retrieveIncidents = async (req, res, next) => {
       });
       return res.json({ pageCount: Math.ceil(count / perPage), incidents });
     } else {
-      const incidents = await Incident.findAll();
+      const incidents = await Incident.findAll({
+        where: { approved: true, reporter_id: null },
+      });
 
       return res.json(incidents);
     }
