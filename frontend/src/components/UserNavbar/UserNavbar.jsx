@@ -14,6 +14,7 @@ import { useContext, useEffect, useState } from "react";
 import { useAuth } from "../../store/AuthProvider/AuthProvider";
 import { SocketContext } from "../../store/AuthProvider/SocketProvider";
 import { FaTrashCan } from "react-icons/fa6";
+import moment from "moment";
 const UserNavbar = () => {
   const [activeItem, setActiveItem] = useState(null);
   const { setAuthUser, logout, authUser } = useAuth();
@@ -28,7 +29,7 @@ const UserNavbar = () => {
     const navItems = document.querySelectorAll(".nav-link-item");
 
     if (!Array.from(navItems).some((item) => item.contains(event.target))) {
-      // Click occurred outside the navigation items
+    
       setActiveItem(null);
     }
   };
@@ -96,6 +97,7 @@ const UserNavbar = () => {
                           }
                           onClick={() => handleNotifItemClick(notif)}
                         >
+                          
                           <span className="notif-text"> {notif.message}</span>{" "}
                           <span
                             className="remove-btn"
@@ -103,6 +105,7 @@ const UserNavbar = () => {
                           >
                             remove
                           </span>
+                          <span className="notif-time">({ moment(notif?.createdAt).fromNow()})</span>
                         </div>
                       ))}
 

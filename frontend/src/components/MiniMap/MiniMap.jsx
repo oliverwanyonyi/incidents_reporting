@@ -1,12 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 
 const LocationPicker = ({ onLocationSelected }) => {
   const map = useRef(null);
-
+  const [markerPosition, setMarkerPosition] = useState([0, 0]);
+  
   useEffect(() => {
     if (map.current) {
-      map.current.flyTo([0, 0], 13);
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          map.current.setView([latitude, longitude], 13);
+          setMarkerPosition([latitude, longitude]);
+        },
+        (error) => {
+          console.error('Error getting current position:', error);
+        }
+      );
     }
   }, []);
 
@@ -14,11 +24,12 @@ const LocationPicker = ({ onLocationSelected }) => {
     const map = useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
+        setMarkerPosition([lat, lng]);
         onLocationSelected(lat, lng);
       },
     });
 
-    return null;
+    return <Marker position={markerPosition}></Marker>;
   }
 
   return (

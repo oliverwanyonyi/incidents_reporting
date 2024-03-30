@@ -5,6 +5,7 @@ import { FaRegBell, FaChevronDown } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/AuthProvider/AuthProvider";
 import { SocketContext } from "../../store/AuthProvider/SocketProvider";
+import moment from "moment";
 
 const AdminNav = () => {
   const [activeItem, setActiveItem] = useState(null);
@@ -76,7 +77,9 @@ function handleNotifItemClick(notif){
                   <div className="notifs_body">
                   {notifications.map(notif=>(
  <div className={notif.read?"notif-item": "notif-item unread"} onClick={()=> handleNotifItemClick(notif)}>
-  {notif.message}
+ <span className="notif-text">
+ {notif.message} <span className="notif-time">({ moment(notif?.createdAt).fromNow()})</span>
+  </span> 
 </div>
                   ))}
                   </div>

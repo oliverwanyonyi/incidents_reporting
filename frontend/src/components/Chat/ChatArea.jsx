@@ -103,7 +103,7 @@ const ChatArea = () => {
     <div className="chat-area">
       <div className="chat-header">
         <span className="chat-user" onClick={chatMoreDetails}>
-        {getChatDetails(authUser, chat?.chat_users)?.chatUser?.full_name} {"    "}
+        {chat && getChatDetails(authUser, chat?.chat_users)?.chatUser?.full_name} {"    "}
          
           
         </span>
@@ -116,14 +116,14 @@ const ChatArea = () => {
 
           (
             {authUser?.roles?.map((role) => role.name).includes("user")
-            ? authoritiesOnline
+            ?chat && authoritiesOnline
                 ?.map((user) => user.id)
                 .includes(
                   getChatDetails(authUser, chat?.chat_users)?.chatUser.id
                 )
               ? <span className="online">online</span>
               : <span >offline</span>
-            : usersOnline
+            :chat && usersOnline
                 ?.map((user) => user.id)
                 .includes(
                   getChatDetails(authUser, chat?.chat_users)?.chatUser.id

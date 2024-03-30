@@ -182,22 +182,22 @@ const ReportIncident = () => {
     }
   }
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          setCoordinates({ latitude, longitude });
-        },
-        (error) => {
-          setError(`Error getting geolocation: ${error.message}`);
-        }
-      );
-    } else {
-      setError("Geolocation is not supported by your browser");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const latitude = position.coords.latitude;
+  //         const longitude = position.coords.longitude;
+  //         setCoordinates({ latitude, longitude });
+  //       },
+  //       (error) => {
+  //         setError(`Error getting geolocation: ${error.message}`);
+  //       }
+  //     );
+  //   } else {
+  //     setError("Geolocation is not supported by your browser");
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (authUser) {
@@ -213,7 +213,9 @@ const ReportIncident = () => {
   }, [authUser]);
 
   useEffect(()=>{
+    if(!anonymous){
     openModal()
+    }
   },[])
 
   return (
@@ -364,9 +366,13 @@ const ReportIncident = () => {
           />
         </div>
 
-        <div className="form-group">
-          <LocationPicker onLocationSelected={handleLocationSelected}/> 
+       {!anonymous && <div className="form-group">
+        <div className="location-info">
+          <p>Latitude: {coordinates?.latitude}</p>
+          <p>Longitude: {coordinates?.longitude}</p>
         </div>
+          <LocationPicker onLocationSelected={handleLocationSelected}/> 
+        </div>}
 
         {loading ? <AuthLoader /> : <button>Submit</button>}
       </form>

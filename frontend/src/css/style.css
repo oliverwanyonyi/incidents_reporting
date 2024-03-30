@@ -258,7 +258,10 @@ form button {
   background-color: #1f6c7e;
 }
 
-
+.notif-time{
+  margin-left: 3.5px;
+  font-weight: bold;
+}
 .slick-dots li button:before {
   color: #14b0d2 !important;
 }
