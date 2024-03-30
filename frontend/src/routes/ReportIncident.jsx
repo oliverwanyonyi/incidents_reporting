@@ -7,6 +7,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../store/AuthProvider/AuthProvider";
 import { successToast } from "../utils/toastMessage";
 import { counties } from "../data/counties";
+import Modal from "../components/Modal/Modal";
+import LocationPicker from "../components/MiniMap/MiniMap";
 
 const ReportIncident = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +30,7 @@ const ReportIncident = () => {
   const [error, setError] = useState();
   const [incidents, setIncidents] = useState([]);
   const [images, setImages] = useState([]);
-  const { authUser } = useAuth();
+  const { authUser,openModal, closeModal } = useAuth();
 
   const { anonymous } = useParams();
 
@@ -99,24 +101,39 @@ const ReportIncident = () => {
     })),
   }));
 
-  const handleChange = (selectedOption, name) => {
-    setFormData({ ...formData, [name]: selectedOption });
+  const handleChange = (value, name) => {
+    if (name === "images") {
+    
+      setImages(value);
+    }else{
+    setFormData({ ...formData, [name]: value });
+  
+  }};
+
+  const handleLocationSelected = (lat, lng) => {
+    console.log(lat,lng);
+    setCoordinates({...coordinates, latitude:lat,longitude:lng});
+  
+    
   };
 
   async function handleFormSubmission(e) {
     e.preventDefault();
 
-    let newFormData = { ...formData };
+    let newFormData = { ...formData,
+    
+      county: formData.county.value,
+      sub_county: formData.sub_county.value,
+      ward: formData.ward.value,
+      incident: formData.incident.value,
+      incident_type: formData.incident_type.value,   
+    
+    };
 
     if (authUser) {
       newFormData = {
         ...newFormData,
         reporter_id: authUser.id,
-        county: newFormData.county.value,
-        sub_county: newFormData.sub_county.value,
-        ward: newFormData.ward.value,
-        incident: newFormData.incident.value,
-        incident_type: newFormData.incident_type.value,
       };
     }
 
@@ -195,8 +212,22 @@ const ReportIncident = () => {
     }
   }, [authUser]);
 
+  useEffect(()=>{
+    openModal()
+  },[])
+
   return (
     <div className="main-content-area">
+      <Modal title={"Incidents Reporting Information"}>
+     
+        <p className="m-info">
+        We use your location to plot incidents on the map for informing purpose
+
+          If you would not like to share your location, you can report anonymously
+          by clicking the button below.
+        </p>
+        <button className="btn" onClick={()=>{navigate('/incident/anonymous/report'); closeModal()}}>Report Anonymously</button>
+      </Modal>
       <form action="" onSubmit={handleFormSubmission} className="form">
         <div className="grid">
           {!anonymous && (
@@ -331,6 +362,10 @@ const ReportIncident = () => {
               handleChange(selectedImages, "images")
             }
           />
+        </div>
+
+        <div className="form-group">
+          <LocationPicker onLocationSelected={handleLocationSelected}/> 
         </div>
 
         {loading ? <AuthLoader /> : <button>Submit</button>}

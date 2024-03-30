@@ -46,7 +46,7 @@ const IncidentMap = () => {
         const { data } = await axiosInstance.get("/incidents/all");
         setIncidents(data);
 
-        
+        console.log(data);
       } catch (error) {
         console.error('Error fetching incidents:', error);
       }

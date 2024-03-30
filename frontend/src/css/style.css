@@ -204,6 +204,7 @@ form button {
 .user {
   font-weight: 600;
   font-size: 16px;
+  margin-bottom: 20px;
 }
 .user span {
   color: #14b0d2;
@@ -212,6 +213,7 @@ form button {
 .user-dashboard {
   padding: 20px;
 }
+
 
 /* .analytics-wrapper {
   display: flex;
@@ -235,6 +237,36 @@ form button {
 .analytics-item .items-total {
   color: #14b0d2;
 }
+
+.m-info{
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.btn{
+  background-color: #14b0d2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn:hover{
+  background-color: #1f6c7e;
+}
+
+
+.slick-dots li button:before {
+  color: #14b0d2 !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #14b0d2 !important;
+}
+
 @media (max-width: 768px) {
   .bottom-bar {
     display: flex;

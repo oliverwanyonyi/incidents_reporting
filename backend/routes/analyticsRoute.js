@@ -98,4 +98,59 @@ router.get("/admin", protect, async (req, res, next) => {
   }
 });
 
+
+router.get("/user", protect, async (req, res, next) => {
+  try {
+    const totalIncidents = await Incident.count({
+      where: {
+        reporter_id: req.user.id,
+      },
+    });
+
+    console.log(req.user.id);
+    // Number of incidents per incident type
+    const incidentTypes = await Incident.findAll({
+      where: {
+        reporter_id: req.user.id,
+      },
+      attributes: [
+        "incident_type",
+        [sequelize.fn("COUNT", sequelize.col("incident_type")), "count"],
+      ],
+      group: ["incident_type"],
+      raw: true,
+    });
+
+    // Count of incidents for each unique status
+    const incidentStatuses = await Incident.findAll({
+      where: {
+        reporter_id: req.user.id,
+      },
+      attributes: [
+        "status",
+        [sequelize.fn("COUNT", sequelize.col("status")), "count"],
+      ],
+      group: ["status"],
+      raw: true,
+    });
+
+  
+
+
+    // Prepare response
+    const analyticsData = {
+      totalIncidents,
+      incidentTypes,
+      incidentStatuses,
+    };
+    console.log(analyticsData);
+
+    res.json(analyticsData);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
 module.exports = router;

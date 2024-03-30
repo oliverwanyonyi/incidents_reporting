@@ -157,10 +157,8 @@ td div.description{
 
 
 .pie-chart {
-  margin: 20px;
+  
   text-align: center;
-  flex: 1 1 400px;
-  max-width: 500px;
   background: #ffffff;
   padding: 10px 0;
   border-radius: 5px;
@@ -224,6 +222,43 @@ td div.description{
   transform: scale(1.5);
   
 }
+
+
+
+/* Timeline.css */
+
+.follow-up-title{
+  color: #14b0d2;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+.timeline-item {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.timeline-content {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  flex: 1;
+}
+
+.timeline-content h3 {
+  margin-top: 0;
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: #14b0d2;
+}
+
+
 
 @media(max-width:768px){
   .grid{

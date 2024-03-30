@@ -41,11 +41,11 @@ db.Incident_Upload.belongsTo(db.Incident, { foreignKey: "incident_id" });
 db.User.hasOne(db.Ward_Authority, { foreignKey: "user_id" });
 db.Ward_Authority.belongsTo(db.User, { foreignKey: "user_id" });
 
-
-
-
 db.Incident_FollowUp = require("./Incident_FollowUp")(sequelize, Sequelize);
 
+
+db.Incident.hasMany(db.Incident_FollowUp, { foreignKey: "incident_id" });
+db.Incident_FollowUp.belongsTo(db.Incident, { foreignKey: "incident_id" });
 db.Chat.hasMany(db.Message, { foreignKey: "chat_id" });
 db.Message.belongsTo(db.Chat, { foreignKey: "chat_id" });
 db.Message.belongsTo(db.User, { foreignKey: "sender", as: "senderInfo" });

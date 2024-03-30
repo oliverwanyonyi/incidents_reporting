@@ -8,6 +8,7 @@ const {
   NotificationUser,
   Role,
   Ward_Authority,
+  Sequelize,
 } = require("../models");
 
 const reportIncident = async (req, res, next) => {
@@ -23,6 +24,7 @@ const reportIncident = async (req, res, next) => {
   }
   try {
     let incident;
+    console.log(req.body);
     if (req.body.reporter_id) {
       incident = await Incident.create({
         ...req.body,
@@ -31,6 +33,8 @@ const reportIncident = async (req, res, next) => {
     } else {
       incident = await Incident.create(req.body);
     }
+
+    // console.log(req.files);
 
     for (const image of req.files) {
       await Incident_Upload.create({
@@ -105,9 +109,7 @@ const retrieveIncidents = async (req, res, next) => {
         county: county,
         ward: ward,
         sub_county: sub_county,
-        incident_type: designation,
       };
-      console.log(req.user.id, isWardAdmin, designation);
 
       if (!isWardAdmin) {
         condition = { assignedTo: req.query.user_id };
@@ -115,7 +117,7 @@ const retrieveIncidents = async (req, res, next) => {
 
       let { rows: incidents, count } = await Incident.findAndCountAll({
         where: condition,
-        include: [{ model: Incident_Upload }],
+        include: [{ model: Incident_Upload }, { model: Incident_FollowUp }],
         order: [["createdAt", "DESC"]],
         offset: (page - 1) * perPage,
         limit: perPage,
@@ -123,8 +125,10 @@ const retrieveIncidents = async (req, res, next) => {
       return res.json({ pageCount: Math.ceil(count / perPage), incidents });
     } else {
       const incidents = await Incident.findAll({
-        where: { approved: true, reporter_id: null },
+        where: { approved: true, reporter_id:{ [Sequelize.Op.not]: null } },
+        include: [{ model: Incident_Upload }, { model: Incident_FollowUp }],
       });
+      console.log(incidents, "ran");
 
       return res.json(incidents);
     }
@@ -141,7 +145,7 @@ const retrieveUserIncidents = async (req, res, next) => {
       where: {
         reporter_id: req.user.id,
       },
-      include: [{ model: Incident_Upload }],
+      include: [{ model: Incident_Upload }, { model: Incident_FollowUp }],
 
       order: [["createdAt", "DESC"]],
       offset: (page - 1) * perPage,

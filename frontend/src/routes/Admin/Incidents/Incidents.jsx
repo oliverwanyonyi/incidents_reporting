@@ -189,6 +189,18 @@ const Incidents = () => {
             )}
 
             <p className="incident-desc">{incident?.description}</p>
+
+            <div className="timeline">
+            <div className="follow-up-title">Follow Ups</div>
+      {incident?.incident_follow_ups?.length ? incident?.incident_follow_ups?.map((followUp, index) => (
+        <div className="timeline-item" key={index}>
+          <div className="timeline-content">
+            <h3>{moment(followUp.createdAt).format('h:mm A, M/D/YYYY')}</h3>
+            <p>{followUp.description}</p>
+          </div>
+        </div>
+      )):<div className="message-box">No Follow ups</div>}
+    </div>
           </>
         ) : type === "followup" ? (
           <form className="form" onSubmit={handleSubmit}>
@@ -353,12 +365,12 @@ const Incidents = () => {
                         scope="row"
                         className="px-6 py-2 font-medium text-gray-900  dark:text-white"
                       >
-                        <p>Name: {row.full_name}</p> <br />
+                       {row?.reporter_id ?<> <p>Name: {row.full_name}</p> <br />
                         <br />
                         <p>Phone: {row.phone}</p> <br />
                         <br />
                        
-                            <p>Ward: {row.ward}</p> <br />
+                            <p>Ward: {row.ward}</p> <br /></> : "anonymous"}
                            
                       
                       </th>
@@ -382,24 +394,26 @@ const Incidents = () => {
                         
 
                         {authUser?.roles?.map(role=>role.name)?.includes('ward-officer') ? <li className="action-item">
-                            <button
+                            {row?.status !== "resolved" && row.status !== "rejected" &&<button
                               className="submenu-link"
                               onClick={() => handleRowClick(row, "followup")}
                             >
                               Update Follow Up
-                            </button>
+                            </button>}
                           </li> : 
                           
-                          <li className="action-item">
+                         row.status !== "resolved" &&  row.status !== "rejected"  && <li className="action-item">
                           <button
                             className="submenu-link"
                             onClick={() => handleRowClick(row, "assign")}
                           >
                             Assign to Authority
                           </button>
-                        </li>                                         
+                        </li>  
+
+                       }                                      
                           
-                          }
+                          
 
                           <li className="action-item">
                             <button

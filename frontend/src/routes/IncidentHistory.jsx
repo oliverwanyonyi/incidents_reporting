@@ -9,6 +9,7 @@ import AuthLoader from "../components/preloaders/AuthLoader";
 import { errorToast } from "../utils/toastMessage";
 import { useAuth } from "../store/AuthProvider/AuthProvider";
 import Modal from "../components/Modal/Modal";
+
 import Slider from "react-slick";
 const IncidentHistory = () => {
   const axiosPrivate = useAxiosPrivate()
@@ -25,10 +26,11 @@ const IncidentHistory = () => {
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    
   };
 
 
@@ -57,6 +59,7 @@ async function retrieveUserIncidents(){
   useEffect(()=>{
     retrieveUserIncidents();
   },[currentPage])
+  
   return (
     <div>
       <Modal title="Incident Details">
@@ -71,7 +74,20 @@ async function retrieveUserIncidents(){
  
           <p className="incident-desc">
             {incident?.description}
-          </p>        
+          </p>    
+          
+          <div className="timeline">
+            <div className="follow-up-title">Follow Ups</div>
+      {incident?.incident_follow_ups?.length ? incident?.incident_follow_ups?.map((followUp, index) => (
+        <div className="timeline-item" key={index}>
+          <div className="timeline-content">
+            <h3>{moment(followUp.createdAt).format('h:mm A, M/D/YYYY')}</h3>
+            <p>{followUp.description}</p>
+          </div>
+        </div>
+      )):<div className="message-box">No Follow ups</div>}
+    </div>
+              
       </Modal>
       <div className="page-title">Past Incidents</div>
       <div className="u-container">

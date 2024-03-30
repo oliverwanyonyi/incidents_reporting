@@ -16,8 +16,8 @@ const Profile = () => {
     const axiosPrivate = useAxiosPrivate()
     const {authUser} = useAuth()
 
-  async  function submitHandler(){
-
+  async  function submitHandler(e){
+    e.preventDefault()
       const {data} = await axiosPrivate.put('/auth/profile/update', formData)
 
       
