@@ -1,6 +1,7 @@
 import { BiSolidDashboard } from "react-icons/bi";
 import {  BsGear } from "react-icons/bs";
 import { MdOutlineAdminPanelSettings, MdCall, MdChat } from "react-icons/md";
+import { PiUserListFill } from "react-icons/pi";
 
   import {  
   FiAlertTriangle,
@@ -39,7 +40,7 @@ export const data = [
 
   {
     title: "Authority",
-    Icon: BsGear,
+    Icon:PiUserListFill,
     children: [
       { title: "Authority List", link: "/admin/authority/list" },
       

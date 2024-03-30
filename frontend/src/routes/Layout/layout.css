@@ -155,6 +155,75 @@ td div.description{
 }
 
 
+.pie-chart {
+  margin: 20px;
+  text-align: center;
+  flex: 1 1 400px;
+  max-width: 500px;
+  background: #ffffff;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+.pie-chart  h3{
+  color: #14b0d2;
+  margin-bottom: 5px;
+  text-align: left;
+  padding-left:7px;
+  font-size: 16px;
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+}
+
+
+.analytics-wrapper{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.analytics-item{
+  background: #a50f0f;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  /* width: 100%; */
+}
+
+.analytics-icon{
+  font-size: 2rem;
+  color: #333;
+  position: absolute;
+  right: 1rem;
+  transition: 500ms ease-in-out;
+}
+
+.analytic-details{
+  text-align: right;
+}
+.analytic-details h3{
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #14b0d2;
+}
+
+.analytic-details p{
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #11677b;
+}
+.analytics-item:hover .analytics-icon{
+  transform: scale(1.5);
+  
+}
+
 @media(max-width:768px){
   .grid{
     grid-template-columns: 1fr;

@@ -213,14 +213,14 @@ form button {
   padding: 20px;
 }
 
-.analytics-wrapper {
+/* .analytics-wrapper {
   display: flex;
   justify-content: space-around;
   
   margin-top: 20px;
   flex-wrap: wrap;
   gap:18px ;
-}
+} */
 .analytics-item {
   background: #ffffff;
   padding: 20px;

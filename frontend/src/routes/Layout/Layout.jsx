@@ -25,11 +25,11 @@ const Layout = ({children}) => {
         <div class='breadcrump pt-4 px-6'>
     <div>
       
-        <h1 class='breadcrump-title'>
+        {location !== "/admin/dashboard"  && location !== "/admin/incident/map"  &&  <h1 class='breadcrump-title'> 
         {
         location.replace('/','').split('/').map((el,idx,arr) =>idx !== arr.length - 1 ? `${el} - `: el).map((el,idx)=>(<span key={idx}>{el}</span>))
       }
-        </h1>
+        </h1>}
         
     </div>
 </div>

@@ -5,6 +5,9 @@ const roleRoutes = require("./routes/roleRoutes");
 const incidentsRoute = require("./routes/incidentsRoute");
 const chatRoutes = require("./routes/chatRoutes");
 const notificationRoute = require("./routes/notificationRoutes");
+const analyticsRoute = require("./routes/analyticsRoute");
+
+
 const socket = require("socket.io");
 const http = require("http");
 const path = require("path");
@@ -57,6 +60,8 @@ app.use("/api/v1/roles", roleRoutes);
 app.use("/api/v1/incidents", incidentsRoute);
 app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/notifications", notificationRoute);
+app.use("/api/v1/analytics", analyticsRoute);
+
 
 app.use(errorHandler);
 
@@ -101,7 +106,6 @@ io.on("connection", (socket) => {
     
   io.emit("agents_online", Array.from(agents_online.values()));
   io.emit('users_online',users_online)
-
 
   });
 
