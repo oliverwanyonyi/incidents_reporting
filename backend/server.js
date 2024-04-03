@@ -15,6 +15,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const db = require("./models");
 const errorHandler = require("./middlewares/error");
+const { default: axios } = require("axios");
 const app = express();
 
 
@@ -51,7 +52,6 @@ app.use(
 );
 app.use(express.json());
 
-// Serve uploaded images statically
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/v1/auth", authRoutes);
@@ -62,6 +62,31 @@ app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/notifications", notificationRoute);
 app.use("/api/v1/analytics", analyticsRoute);
 
+const OPENCAGE_API_KEY = 'de7bc964b89542b78db47982390a3848'
+
+app.get('/coords', async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${query}&key=${OPENCAGE_API_KEY}`);
+
+    const { results } = response.data;
+    if (results.length > 0) {
+      const { geometry, formatted } = results[0];
+      const { lat, lng } = geometry;
+      
+      res.json({ 
+        place: formatted,
+        coordinates: { lat, lng }
+      });
+    } else {
+      res.status(404).json({ error: 'Place not found' });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error });
+  }
+});
 
 app.use(errorHandler);
 

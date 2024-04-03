@@ -124,18 +124,28 @@ const retrieveIncidents = async (req, res, next) => {
       });
       return res.json({ pageCount: Math.ceil(count / perPage), incidents });
     } else {
-      const incidents = await Incident.findAll({
-        where: { approved: true, reporter_id:{ [Sequelize.Op.not]: null } },
-        include: [{ model: Incident_Upload }, { model: Incident_FollowUp }],
-      });
-      console.log(incidents, "ran");
-
-      return res.json(incidents);
+     res.status(400).json({message:"udefined role"})
     }
   } catch (error) {
     next(error);
   }
 };
+
+const mapIncidents = async (req,res,next)=>{
+  try {
+
+    const incidents = await Incident.findAll({
+      where: { approved: true, reporter_id:{ [Sequelize.Op.not]: null } },
+      include: [{ model: Incident_Upload }, { model: Incident_FollowUp }],
+    });
+    console.log(incidents, "ran");
+
+    return res.json(incidents);
+    
+  } catch (error) {
+    next(error)
+  }
+}
 
 const retrieveUserIncidents = async (req, res, next) => {
   try {
@@ -224,6 +234,7 @@ async function updateNotification(req, res, next) {
 module.exports = {
   reportIncident,
   retrieveIncidents,
+  mapIncidents,
   retrieveUserIncidents,
   updateFollowUp,
   updateNotification,

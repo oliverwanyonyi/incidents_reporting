@@ -43,7 +43,7 @@ const IncidentMap = () => {
   
     const fetchIncidents = async () => {
       try {
-        const { data } = await axiosInstance.get("/incidents/all");
+        const { data } = await axiosInstance.get("/incidents/map/all");
         setIncidents(data);
 
         console.log(data);

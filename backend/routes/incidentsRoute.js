@@ -4,6 +4,7 @@ const {
   retrieveUserIncidents,
   updateFollowUp,
   updateNotification,
+  mapIncidents,
 } = require("../controllers/incidentController");
 const path = require("path");
 const { protect } = require("../middlewares/auth");
@@ -50,7 +51,11 @@ router
     reportIncident
   );
 
-router.route("/all").get(protect, retrieveIncidents);
+router.route("/all").get(protect,
+   retrieveIncidents);
+
+router.route("/map/all").get(mapIncidents);
+
 
 router.route("/user").get(protect, retrieveUserIncidents);
 

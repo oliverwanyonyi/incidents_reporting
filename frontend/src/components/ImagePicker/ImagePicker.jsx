@@ -27,7 +27,7 @@ const ImagePicker = ({onImageSelect}) => {
     <div className="image-picker-container">
     <div {...getRootProps()} className="dropzone">
       <input {...getInputProps()} />
-      <p>Drag 'n' drop an image here, or click to select an image</p>
+      <p>Upload incident images here</p>
     </div>
 
     <div className="selected-images">

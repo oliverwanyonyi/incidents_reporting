@@ -109,11 +109,6 @@ const ChatArea = () => {
         </span>
 
         <span style={{ color: "#202020" }}>
-
-         {
-              console.log(usersOnline)
-            }
-
           (
             {authUser?.roles?.map((role) => role.name).includes("user")
             ?chat && authoritiesOnline

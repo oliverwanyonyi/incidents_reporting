@@ -127,8 +127,8 @@ authUser?.roles?.some(role => ['ward-admin','ward-officer'].includes(role.name))
           
           </div>
          {authUser?.roles?.some(role => ['ward-admin', 'ward-officer'].includes(role.name))&& <div className="analytics-wrapper">
-          <PieChart data={data?.incidentTypes} title="Incident" />
-          <PieChart data={data?.incidentStatuses} title="Status" />
+          <PieChart data={data?.incidentTypes} title="Incidents" />
+          <PieChart data={data?.incidentStatuses} title="Incidents Status" />
           </div>}
         </div>
         
