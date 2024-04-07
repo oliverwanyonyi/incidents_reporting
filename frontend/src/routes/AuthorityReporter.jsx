@@ -1,6 +1,7 @@
 import React from 'react'
 import Auth from './Auth'
 import { useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 
 const AuthorityReporter = () => {
     const navigate = useNavigate()
@@ -9,6 +10,10 @@ const AuthorityReporter = () => {
             navigate(to);
     }
   return (
+    <>
+    <Helmet>
+     <title>Safety First | Auth</title>
+   </Helmet>
     <Auth>
         <div className="auth-guide">
 
@@ -18,13 +23,14 @@ const AuthorityReporter = () => {
         </div>
         <div className="divider">Or</div>
        <div className="text-container">
-       <h2>Incident to report </h2>
+       <h2>Incident reporter </h2>
 
 <button onClick={()=>handleNavigate('/reporter/register')}> Sign Up Here</button>
        </div>
        </div>
         
     </Auth>
+    </>
   )
 }
 

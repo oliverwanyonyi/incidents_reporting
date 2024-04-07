@@ -180,7 +180,7 @@ const reporterSignup = async (req, res, next) => {
     const promises = userIds.map((userId) => {
       return Notification.create({
         message:'New Incident Reporter has Signed up',
-        receiver_id_id: userId,
+        receiver_id: userId,
         initiator_id: user.id,
       });
     });

@@ -4,6 +4,7 @@ import { GoAlertFill } from "react-icons/go"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useAuth } from "../../store/AuthProvider/AuthProvider";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 const Dashboard = () => {
@@ -25,9 +26,13 @@ const Dashboard = () => {
     getAnalyticsData();
   }, []);
   return (
+    <>
+    <Helmet>
+      <title>Safety First | Dashboard</title>
+    </Helmet>
     <div className="user-dashboard">
          <h1 className="user welcome-text" >
-        Good morning<span > Oliver Wanyonyi </span> 
+        Good morning<span > {authUser?.full_name} </span> 
           </h1>
           <div className="analytics-container">
           <div className="analytics-wrapper">
@@ -51,6 +56,7 @@ const Dashboard = () => {
           </div>
  </div>
  </div>
+ </>
   )
 }
 

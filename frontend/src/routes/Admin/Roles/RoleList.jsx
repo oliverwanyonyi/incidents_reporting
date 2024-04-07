@@ -10,6 +10,7 @@ import { twMerge } from 'tailwind-merge'
 import moment from 'moment'
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate'
 import { infoToast } from '../../../utils/toastMessage'
+import { Helmet } from 'react-helmet-async'
 
 const RoleList = () => {
   
@@ -58,6 +59,10 @@ const RoleList = () => {
     },[currentPage])
   
     return (
+      <>
+      <Helmet>
+        <title>Admin | Roles</title>
+      </Helmet>
       <div className="main-list">
       {/* <x-breadcrump :page="$page"/> */}
       <div className="main-list-container">
@@ -169,6 +174,7 @@ const RoleList = () => {
         </div>
       </div>
     </div>
+    </>
     )
   }
 

@@ -6,6 +6,7 @@ import AuthLoader from '../components/preloaders/AuthLoader';
 import { errorToast, successToast } from '../utils/toastMessage';
 import { axiosInstance } from '../axios/axios';
 import { SocketContext } from '../store/AuthProvider/SocketProvider';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
 
@@ -94,7 +95,12 @@ const Login = () => {
    },[])
 
   return (
+    <>
+    <Helmet>
+     <title>Safety First | Login</title>
+   </Helmet>
    <Auth>
+    
      <form onSubmit={handleFormSubmit}>
              
              <h1 className="auth-form-header">
@@ -117,8 +123,10 @@ const Login = () => {
              {!loading ? <button>Login</button>:<AuthLoader/>}
 
              <h1 className='login-redirect'>Don't have an account <Link to={'/register/reporter/authority'}>Signup</Link></h1>
+
+
           </form>
-   </Auth>  )
+   </Auth> </> )
 }
 
 export default Login

@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import redMarkerIcon from '../assets/marker.png';
 import { axiosInstance } from '../axios/axios';
 import AuthLoader from '../components/preloaders/AuthLoader';
+import { Helmet } from 'react-helmet-async';
 
 
 const redMarker = new L.Icon({
@@ -59,6 +60,10 @@ const IncidentMap = () => {
     return<AuthLoader/>
   }
   return (
+    <>
+    <Helmet>
+     <title>Safety First | Incidents Map</title>
+   </Helmet>
     <MapContainer center={userPosition} zoom={13} style={{ height: '100vh', width: '100%' }}>
       <TileLayer
         url="https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=VaRxOZepV22Y1XWxBn1w"
@@ -83,6 +88,7 @@ const IncidentMap = () => {
         </CircleMarker>
       ))}
     </MapContainer>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import { GoAlertFill } from "react-icons/go";
 import { FiAlertTriangle } from "react-icons/fi";
 import { useAuth } from "../../store/AuthProvider/AuthProvider";
 import { FaUsers } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,10 @@ const Dashboard = () => {
   }, []);
 
   return (
+    <>
+    <Helmet>
+      <title>Admin | Dashboard</title>
+    </Helmet>
     <div className="main-list">
       {!loading ? (
         <>
@@ -137,6 +142,7 @@ authUser?.roles?.some(role => ['ward-admin','ward-officer'].includes(role.name))
         <p className="message-box">Loading...</p>
       )}
     </div>
+    </>
   );
 };
 

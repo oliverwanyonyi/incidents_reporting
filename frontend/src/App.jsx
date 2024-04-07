@@ -9,16 +9,8 @@ import Login from "./routes/Login";
 import { ToastContainer } from "react-toastify";
 import Layout from "./routes/Layout/Layout";
 import Dashboard from "./routes/Admin/Dashboard";
-import CountyList from "./routes/Admin/CountyList";
-import AddCounty from "./routes/Admin/AddCounty";
-import AddSubLocation from "./routes/Admin/AddSubLocation";
-import SubLocationList from "./routes/Admin/SubLocationList";
-import WardList from "./routes/Admin/WardList";
-import AddWard from "./routes/Admin/AddWard";
 import AddRole from "./routes/Admin/Roles/AddRole";
 import RoleList from "./routes/Admin/Roles/RoleList";
-import SubCountyAuthority from "./routes/Admin/SubCountyAuthority/SubCountyAuthority";
-import SubCountyAuthorityList from "./routes/Admin/SubCountyAuthority/SubCountyAuthorityList";
 import WardAuthorityList from "./routes/Admin/WardAuthrotiy/WardAuthorityList";
 import WardAuthority from "./routes/Admin/WardAuthrotiy/WardAuthority";
 import UserLayout from "./routes/UserLayout/UserLayout";
@@ -32,13 +24,16 @@ import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoute";
 import Unauthorized from "./routes/Unauthorized";
 import Profile from "./routes/Admin/Profile/Profile";
 import UserProfile from "./routes/UserProfile";
-import Chat from "./routes/Admin/Chat/Chat";
 import UserChat from "./routes/Chat";
 import AuthorityList from "./routes/Admin/AuthorityList";
+
+import {HelmetProvider} from 'react-helmet-async'
+
 function App() {
   return (
     <>
-      <Routes>
+
+       <HelmetProvider context={{}}><Routes>
         <Route path="/" element={<MapTest />} />
         <Route
           path="/dashboard"
@@ -106,31 +101,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/admin/subcounty-authority/all"
-          element={
-            <Layout>
-              <SubCountyAuthorityList />
-            </Layout>
-          }
-        />
-
-        <Route
-          path="/admin/subcounty-authority/add"
-          element={
-            <Layout>
-              <SubCountyAuthority />
-            </Layout>
-          }
-        />
-        <Route
-          path="/admin/:editId/sublocation/edit"
-          element={
-            <Layout>
-              <SubCountyAuthority />
-            </Layout>
-          }
-        />
+      
 
         <Route
           path="/admin/roles/add"
@@ -159,32 +130,10 @@ function App() {
           }
         />
 
-        <Route
-          path="/admin/:locationId/ward/add"
-          element={
-            <Layout>
-              <AddWard />
-            </Layout>
-          }
-        />
+       
 
-        <Route
-          path="/admin/:locationId/wards"
-          element={
-            <Layout>
-              <WardList />
-            </Layout>
-          }
-        />
-
-        <Route
-          path="/admin/:countyId/sublocation/add"
-          element={
-            <Layout>
-              <AddSubLocation />
-            </Layout>
-          }
-        />
+       
+      
         <Route
           path="/admin/incident/map"
           element={
@@ -194,31 +143,6 @@ function App() {
           }
         />
 
-        <Route
-          path="/admin/:countyId/sublocations"
-          element={
-            <Layout>
-              <SubLocationList />
-            </Layout>
-          }
-        />
-
-        <Route
-          path="/admin/counties/all"
-          element={
-            <Layout>
-              <CountyList />
-            </Layout>
-          }
-        />
-        <Route
-          path="/admin/county/add"
-          element={
-            <Layout>
-              <AddCounty />
-            </Layout>
-          }
-        />
 
         <Route
           path="/admin/incident/all"
@@ -256,9 +180,10 @@ function App() {
         <Route path="reporter/register" element={<ReporterSignup />} />
 
         <Route path="/login" element={<Login />} />
-
-        {/* <Route path='/incidents/map' element={<IncidentsMap/>} /> */}
-
+      
+      
+       
+       
         <Route path="/unauthorized" element={<Unauthorized />} />
 
         <Route
@@ -302,6 +227,7 @@ function App() {
       </Routes>
 
       <ToastContainer />
+      </HelmetProvider>
     </>
   );
 }

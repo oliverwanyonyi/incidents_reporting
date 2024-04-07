@@ -11,6 +11,7 @@ import { useAuth } from "../store/AuthProvider/AuthProvider";
 import Modal from "../components/Modal/Modal";
 
 import Slider from "react-slick";
+import { Helmet } from "react-helmet-async";
 const IncidentHistory = () => {
   const axiosPrivate = useAxiosPrivate()
   const [loading,setLoading] = useState(false)
@@ -61,6 +62,10 @@ async function retrieveUserIncidents(){
   },[currentPage])
   
   return (
+    <>
+    <Helmet>
+     <title>Safety First | Incidents History</title>
+   </Helmet>
     <div>
       <Modal title="Incident Details">
       { incident?.incident_uploads?.length > 0 && <Slider {...settings} className='image-slider'>
@@ -203,6 +208,7 @@ async function retrieveUserIncidents(){
         </div>
       </div>
     </div>
+    </>
   )
 }
 

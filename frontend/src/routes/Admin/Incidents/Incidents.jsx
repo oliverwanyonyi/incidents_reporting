@@ -13,6 +13,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { errorToast, successToast } from "../../../utils/toastMessage";
+import { Helmet } from "react-helmet-async";
 
 const Incidents = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -162,6 +163,10 @@ const Incidents = () => {
     }
   }, [currentPage, fetchAgain]);
   return (
+    <>
+    <Helmet>
+      <title>Admin | Reported Incidents</title>
+    </Helmet>
     <div className="main-list">
       <Modal
         title={
@@ -454,6 +459,7 @@ const Incidents = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

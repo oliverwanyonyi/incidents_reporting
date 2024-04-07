@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useAuth } from "../store/AuthProvider/AuthProvider"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
+import { Helmet } from "react-helmet-async"
 
 
 
@@ -35,6 +36,10 @@ const Profile = () => {
       },[])
 
   return (
+    <>
+    <Helmet>
+      <title>Safety First | Profile</title>
+    </Helmet>
     <div className="main-list">
       <div className="main-list-container">
         <form className="form" onSubmit={submitHandler}>
@@ -113,6 +118,7 @@ const Profile = () => {
         </form>
       </div>
     </div>
+    </>
   )
 }
 

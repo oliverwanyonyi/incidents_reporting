@@ -9,6 +9,7 @@ import { twMerge } from "tailwind-merge";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { successToast } from "../../utils/toastMessage";
+import { Helmet } from "react-helmet-async";
 
 const AuthorityList = () => {
   const [loading, setLoading] = useState(false);
@@ -76,6 +77,10 @@ const AuthorityList = () => {
     retrieveCounties();
   }, [currentPage, fetchAgain]);
   return (
+    <>
+    <Helmet>
+      <title>Admin | Authority List</title>
+    </Helmet>
     <div className="main-list">
       <div className="main-list-container">
         <div className="table-container">
@@ -199,6 +204,7 @@ const AuthorityList = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

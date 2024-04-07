@@ -6,6 +6,7 @@ import { axiosInstance } from '../../../axios/axios';
 import { errorToast, successToast } from '../../../utils/toastMessage';
 import { FaPlus } from 'react-icons/fa';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import { Helmet } from 'react-helmet-async';
 
 const AddRole = () => {
     const [ roles,setRoles] = useState([{name:''}])
@@ -48,6 +49,10 @@ const AddRole = () => {
     }
 
   return (
+    <>
+    <Helmet>
+      <title>Admin | Add Role</title>
+    </Helmet>
     <div className="main-list">
     <div className="main-list-container">
         <form className="form" onSubmit={submitHandler}>
@@ -76,6 +81,7 @@ const AddRole = () => {
         </form>
     </div>
 </div>
+</>
   )
 }
 

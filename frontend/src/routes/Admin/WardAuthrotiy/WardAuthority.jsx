@@ -6,6 +6,7 @@ import AuthLoader from "../../../components/preloaders/AuthLoader";
 import { errorToast, successToast } from "../../../utils/toastMessage";
 import { useAuth } from "../../../store/AuthProvider/AuthProvider";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { Helmet } from "react-helmet-async";
 
 const WardAuthority = () => {
   const [formData, setFormData] = useState({
@@ -124,6 +125,10 @@ const WardAuthority = () => {
 
 
   return (
+    <>
+    <Helmet>
+      <title>Admin | Add Ward AUthority</title>
+    </Helmet>
     <div className="main-list">
       <div className="main-list-container">
         <form className="form" onSubmit={submitHandler}>
@@ -238,6 +243,7 @@ const WardAuthority = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

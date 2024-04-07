@@ -7,6 +7,7 @@ import { axiosInstance } from '../axios/axios'
 import AuthLoader from '../components/preloaders/AuthLoader'
 import { errorToast } from '../utils/toastMessage'
 import { counties } from '../data/counties'
+import { Helmet } from 'react-helmet-async'
 const ReporterSignup = () => {
 
   const [loading,setLoading] = useState(false);
@@ -97,6 +98,10 @@ async function handleFormSubmit(e){
 
   },[])
   return (
+    <>
+    <Helmet>
+     <title>Safety First | Reporter Signup</title>
+   </Helmet>
     <Auth>
           <form  onSubmit={handleFormSubmit}>
              
@@ -126,6 +131,21 @@ async function handleFormSubmit(e){
                 </span>}
             
              </div>
+
+             <div className="form-group">
+          <label htmlFor="email">
+            Email <span className="required">*</span>{" "}
+          </label>
+          <input
+            type="text"
+            placeholder="e.g johndoe@gmail.com"
+            onChange={changeHandler}
+            value={formData.email}
+            name="email"
+            className="form-control"
+          />
+          {error?.email && <span className="vl-error">{error?.email}</span>}
+        </div>
 
              <div className="form-group">
           <label htmlFor="county">
@@ -202,6 +222,7 @@ async function handleFormSubmit(e){
              <h1 className='login-redirect'>Already have an account <Link to={'/login'}>Login</Link></h1>
           </form>
           </Auth>
+          </>
   )
 }
 

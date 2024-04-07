@@ -9,6 +9,7 @@ import { successToast } from "../utils/toastMessage";
 import { counties } from "../data/counties";
 import Modal from "../components/Modal/Modal";
 import LocationPicker from "../components/MiniMap/MiniMap";
+import { Helmet } from "react-helmet-async";
 
 const ReportIncident = () => {
   const [formData, setFormData] = useState({
@@ -219,6 +220,10 @@ const ReportIncident = () => {
   },[])
 
   return (
+    <>
+    <Helmet>
+     <title>Safety First | Report Incident</title>
+   </Helmet>
     <div className="main-content-area">
       <Modal title={"Incidents Reporting Information"}>
      
@@ -377,6 +382,7 @@ const ReportIncident = () => {
         {loading ? <AuthLoader /> : <button>Submit</button>}
       </form>
     </div>
+    </>
   );
 };
 

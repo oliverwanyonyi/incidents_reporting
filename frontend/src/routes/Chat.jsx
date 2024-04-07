@@ -9,6 +9,7 @@ import chatuser from "../assets/chat_user.png";
 import { format } from "timeago.js";
 import { getChatDetails } from "../utils/getChatHeader";
 import Modal from '../components/Modal/Modal'
+import { Helmet } from "react-helmet-async";
 
 const Chat = () => {
   const { authUser } = useAuth();
@@ -67,6 +68,10 @@ const Chat = () => {
 
   
   return (
+    <>
+    <Helmet>
+     <title>Safety First | Chat </title>
+   </Helmet>
     <div className={`call-area ${chatActive &&  'chat-open'}`}>
 
 <Modal title="Contact Info">
@@ -150,7 +155,7 @@ const Chat = () => {
                       : chatItem?.messages[0]?.receiverInfo?.full_name} */}
                       {authority.full_name}
                     <div className="timestamp">
-                     Department ({authority?.ward_authority.designation})
+                     Department ({authority?.ward_authority?.designation})
                     </div>
                   </div>
                 </li>
@@ -207,6 +212,7 @@ const Chat = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

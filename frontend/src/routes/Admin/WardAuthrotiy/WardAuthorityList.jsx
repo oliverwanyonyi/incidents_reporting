@@ -10,6 +10,7 @@ import AuthLoader from "../../../components/preloaders/AuthLoader"
 import { useAuth } from "../../../store/AuthProvider/AuthProvider"
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
 import { infoToast } from "../../../utils/toastMessage"
+import { Helmet } from "react-helmet-async"
 
 const WardAuthorityList = () => {
   
@@ -57,6 +58,10 @@ retrieveData()
 
 
   return (
+    <>
+    <Helmet>
+      <title>Admin | Ward Authorities</title>
+    </Helmet>
     <div className="main-list">
     {/* <x-breadcrump :page="$page"/> */}
     <div className="main-list-container">
@@ -187,6 +192,7 @@ retrieveData()
       </div>
     </div>
   </div>
+  </>
   )
 }
 

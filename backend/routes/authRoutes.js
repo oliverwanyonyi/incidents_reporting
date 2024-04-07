@@ -52,6 +52,7 @@ res.send("User Seeded")
   router.route('/reporter/signup').post( [
     body("full_name").notEmpty().withMessage("This field is required"),
     body("phone").notEmpty().withMessage("This field is required"),
+    body("email").isEmail().normalizeEmail().withMessage("Invalid Email"),
     body("password").isLength({ min: 8 }).withMessage("Password should be atleast 8 characters"),
     body("county").notEmpty().withMessage("This field is required"),
     body("sub_county").notEmpty().withMessage("This field is required"),

@@ -8,6 +8,7 @@ import { useAuth } from "../store/AuthProvider/AuthProvider";
 import AuthLoader from "../components/preloaders/AuthLoader";
 import { errorToast, successToast } from "../utils/toastMessage";
 import { counties } from "../data/counties.js";
+import { Helmet } from "react-helmet-async";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
@@ -103,6 +104,10 @@ const Signup = () => {
   
 
   return (
+    <>
+     <Helmet>
+      <title>Safety First | Authority Signup</title>
+    </Helmet>
     <Auth>
       <form onSubmit={handleFormSubmit}>
         <h1 className="auth-form-header">Authority | Signup</h1>
@@ -269,6 +274,8 @@ const Signup = () => {
         </h1>
       </form>
     </Auth>
+    </>
+
   );
 };
 
