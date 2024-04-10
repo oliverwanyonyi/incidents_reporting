@@ -17,6 +17,7 @@ const {
   Notification,
 } = require("../models");
 const { Op, fn, col, literal } = require("sequelize");
+const {  generatePdf } = require("../utils/generatePdf");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/"); 
@@ -172,4 +173,17 @@ router.put("/:id/assign", protect, async (req, res, next) => {
     next(error);
   }
 });
+
+
+
+router.get('/pdf/generate', async(req,res,next)=>{
+try {
+  
+  const incidents = await Incident.findAll();
+ generatePdf(res,incidents)
+
+} catch (error) {
+  next(error)
+}
+})
 module.exports = router;

@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { errorToast, successToast } from "../../../utils/toastMessage";
 import { Helmet } from "react-helmet-async";
+import { FaPrint } from "react-icons/fa";
 
 const Incidents = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,6 +24,7 @@ const Incidents = () => {
     status: "",
     description: "",
   });
+  const [downloading,setDownloading] = useState(false)
   const [error, setError] = useState();
   const [type, setType] = useState("");
   const [pageCount, setPageCount] = useState();
@@ -100,6 +102,27 @@ const Incidents = () => {
     );
 
     setAuthorities(data);
+  }
+
+
+  const handlePrint = async () =>{
+    setDownloading(true);
+        try {
+            const response = await axiosPrivate.get('/incidents/pdf/generate', {
+                responseType: 'blob',
+            });
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'incidents.pdf');
+            document.body.appendChild(link);
+            link.click();
+            setDownloading(false);
+        } catch (error) {
+            errorToast(error?.response?.data?.message || error?.message || "Error downloadng pdf")
+            setDownloading(false);
+        }
   }
 
   const handleAssignment = async (user) => {
@@ -314,7 +337,18 @@ const Incidents = () => {
         )}
       </Modal>
       <div className="main-list-container">
-        <div className="admin-page-header"></div>
+      <div className="admin-page-header" style={{display:'flex',justifyContent:'flex-end', width:'100%', paddingRight:'20px'}}>
+       
+          <button
+style={{cursor:downloading?'not-allowed' :'pointer'}}
+            className="admin-nav-link"
+            onClick={handlePrint}
+            disabled={downloading}
+          >
+            {downloading ? "Downloading...": "Print"}
+            <FaPrint className="icon fas fa-plus ml-1 text-md"></FaPrint>
+          </button>
+      </div>
 
         <div className="table-container">
           <table
